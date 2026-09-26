@@ -1,6 +1,6 @@
 package com.example
 
-object R {
+object SharedStrings {
     object string {
         const val content_desc_add_transaction=1; const val nav_prev_month=2; const val nav_next_month=3; const val current_month_badge=4
         const val budget_remaining_title=5; const val currency_fcfa=6; const val total_spent_format=7; const val budget_usage_percent_format=8
@@ -14,15 +14,15 @@ object R {
 }
 fun stringResource(id: Int, vararg args: Any): String {
     val t=when(id){
-        R.string.content_desc_add_transaction->"Ajouter une dépense"; R.string.nav_prev_month->"Mois précédent"; R.string.nav_next_month->"Mois suivant"; R.string.current_month_badge->"En cours"
-        R.string.budget_remaining_title->"BUDGET RESTANT DISPONIBLE"; R.string.currency_fcfa->"FCFA"; R.string.total_spent_format->"Total dépensé : %s FCFA"; R.string.budget_usage_percent_format->"%d%% consommé"
-        R.string.filter_all->"Tous"; R.string.all_categories_summary->"✨ Toutes les catégories"; R.string.multiple_categories_selected_format->"%s %d catégories sélectionnées"; R.string.expense_count_month_format->"%d dépense(s) en %s"
-        R.string.transactions_detail_title_format->"Détail des dépenses (%s)"; R.string.content_desc_selected->"Sélectionné"; R.string.empty_expenses_month_format->"Aucune dépense en %s"
-        R.string.empty_expenses_filtered_format->"Aucune dépense dans les catégories sélectionnées pour %s"; R.string.empty_expenses_hint->"Cliquez sur '+' pour ajouter une dépense pour ce mois"
-        R.string.content_desc_edit->"Modifier"; R.string.content_desc_delete_format->"Supprimer la transaction %s"; R.string.date_today->"Aujourd'hui"; R.string.date_yesterday->"Hier"
-        R.string.dialog_title_new->"Nouvelle dépense"; R.string.dialog_title_edit->"Modifier la dépense"; R.string.label_transaction_title->"Titre de la dépense"; R.string.placeholder_transaction_title->"Ex: Supermarché, Métro..."
-        R.string.label_transaction_amount->"Montant (FCFA)"; R.string.placeholder_transaction_amount->"Ex: 5000"; R.string.label_category->"Catégorie"; R.string.btn_save->"Enregistrer"; R.string.btn_add->"Ajouter"; R.string.btn_cancel->"Annuler"
-        R.string.category_transport->"Transport"; R.string.category_alimentation->"Alimentation"; R.string.category_loisirs->"Loisirs"; R.string.category_logement->"Logement"; R.string.app_name->"EcoBudget"; R.string.app_subtitle->"GESTION BUDGÉTAIRE"; else->""
+        SharedStrings.string.content_desc_add_transaction->"Ajouter une dépense"; SharedStrings.string.nav_prev_month->"Mois précédent"; SharedStrings.string.nav_next_month->"Mois suivant"; SharedStrings.string.current_month_badge->"En cours"
+        SharedStrings.string.budget_remaining_title->"BUDGET RESTANT DISPONIBLE"; SharedStrings.string.currency_fcfa->"FCFA"; SharedStrings.string.total_spent_format->"Total dépensé : %s FCFA"; SharedStrings.string.budget_usage_percent_format->"%d%% consommé"
+        SharedStrings.string.filter_all->"Tous"; SharedStrings.string.all_categories_summary->"✨ Toutes les catégories"; SharedStrings.string.multiple_categories_selected_format->"%s %d catégories sélectionnées"; SharedStrings.string.expense_count_month_format->"%d dépense(s) en %s"
+        SharedStrings.string.transactions_detail_title_format->"Détail des dépenses (%s)"; SharedStrings.string.content_desc_selected->"Sélectionné"; SharedStrings.string.empty_expenses_month_format->"Aucune dépense en %s"
+        SharedStrings.string.empty_expenses_filtered_format->"Aucune dépense dans les catégories sélectionnées pour %s"; SharedStrings.string.empty_expenses_hint->"Cliquez sur '+' pour ajouter une dépense pour ce mois"
+        SharedStrings.string.content_desc_edit->"Modifier"; SharedStrings.string.content_desc_delete_format->"Supprimer la transaction %s"; SharedStrings.string.date_today->"Aujourd'hui"; SharedStrings.string.date_yesterday->"Hier"
+        SharedStrings.string.dialog_title_new->"Nouvelle dépense"; SharedStrings.string.dialog_title_edit->"Modifier la dépense"; SharedStrings.string.label_transaction_title->"Titre de la dépense"; SharedStrings.string.placeholder_transaction_title->"Ex: Supermarché, Métro..."
+        SharedStrings.string.label_transaction_amount->"Montant (FCFA)"; SharedStrings.string.placeholder_transaction_amount->"Ex: 5000"; SharedStrings.string.label_category->"Catégorie"; SharedStrings.string.btn_save->"Enregistrer"; SharedStrings.string.btn_add->"Ajouter"; SharedStrings.string.btn_cancel->"Annuler"
+        SharedStrings.string.category_transport->"Transport"; SharedStrings.string.category_alimentation->"Alimentation"; SharedStrings.string.category_loisirs->"Loisirs"; SharedStrings.string.category_logement->"Logement"; SharedStrings.string.app_name->"EcoBudget"; SharedStrings.string.app_subtitle->"GESTION BUDGÉTAIRE"; else->""
     }
     return args.fold(t){acc,a->acc.replaceFirst(Regex("%[sd]"),a.toString())}
 }

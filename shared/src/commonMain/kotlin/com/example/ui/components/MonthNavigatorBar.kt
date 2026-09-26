@@ -32,7 +32,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.R
+import com.example.SharedStrings
 import com.example.model.YearMonth
 import com.example.ui.theme.DarkOutline
 import com.example.ui.theme.DarkSurfaceVariant
@@ -82,7 +82,7 @@ fun MonthNavigatorBar(
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
-                    contentDescription = stringResource(R.string.nav_prev_month),
+                    contentDescription = stringResource(SharedStrings.string.nav_prev_month),
                     tint = Color.White,
                     modifier = Modifier.size(24.dp)
                 )
@@ -120,7 +120,7 @@ fun MonthNavigatorBar(
                             .padding(horizontal = 6.dp, vertical = 2.dp)
                     ) {
                         Text(
-                            text = stringResource(R.string.current_month_badge),
+                            text = stringResource(SharedStrings.string.current_month_badge),
                             style = MaterialTheme.typography.labelSmall.copy(
                                 fontSize = 10.sp,
                                 fontWeight = FontWeight.Bold
@@ -141,7 +141,7 @@ fun MonthNavigatorBar(
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                    contentDescription = stringResource(R.string.nav_next_month),
+                    contentDescription = stringResource(SharedStrings.string.nav_next_month),
                     tint = Color.White,
                     modifier = Modifier.size(24.dp)
                 )
