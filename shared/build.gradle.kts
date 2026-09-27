@@ -1,14 +1,63 @@
-plugins { kotlin("multiplatform"); id("com.android.library"); id("org.jetbrains.compose"); id("org.jetbrains.kotlin.plugin.compose") }
-kotlin { androidTarget(); iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+plugins {
+    kotlin("multiplatform")
+    id("com.android.library")
+// Support de Compose Multiplatform et génération de l'objet Res
+    id("org.jetbrains.compose") version "1.6.11"
+// Compilateur Compose obligatoire depuis Kotlin 2.0+
+    alias(libs.plugins.kotlin.compose)
+}
 
-    targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget>().configureEach {
-        binaries.framework {
-            baseName = "Shared"
+kotlin{
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        }
+    }
+
+    //Cibles iOS avec génération du framework binaire
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "shared"
             isStatic = true
         }
     }
-    sourceSets { commonMain.dependencies { implementation(compose.runtime); implementation(compose.foundation); implementation(compose.material3); implementation(compose.materialIconsExtended); implementation(compose.ui); implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2"); implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1") } }
+
+    // Dépendances communes
+    sourceSets {
+        commonMain.dependencies {
+// Asynchronisme et flux réactifs
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+// Gestion de l'état Ul et cycle de vie multiplateforme
+                implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel:2.8.0")
+// Manipulation multiplateforme des dates et heures
+
+                implementation ("org.jetbrains.kotlinx:kotlinx-datetime:0.6.0")
+// Resources CMP (exposées à app) et Runtime Compose
+                api(compose.components.resources)
+                implementation(compose.runtime)
+    }
 }
-android { namespace="com.example.shared"; compileSdk=35; defaultConfig { minSdk=24 } }
+
+}
+
+
+// Autorise le module Android 'app' à consommer l'objet Res
+compose.resources{
+    publicResClass = true}
+
+// Configuration minimale requise par le plugin com.android.library
+android {
+    namespace = "com.example.shared"
+    compileSdk = 34
+    defaultConfig {
+        minSdk = 24
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+}
